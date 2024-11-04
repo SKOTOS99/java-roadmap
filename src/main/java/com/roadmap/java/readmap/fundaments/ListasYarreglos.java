@@ -13,16 +13,8 @@ public class ListasYarreglos {
         System.out.println("Ingrese el valor de la lista: ");
         String numeros = sc.nextLine();
         List<Integer> arrayNumeros = new ArrayList<>(Arrays.stream(numeros.split(",")).map(Integer::valueOf).toList());
-        StringBuilder result = new StringBuilder();
-        result.append("Lista ingresada: ").append(arrayNumeros).append("\n").append("\n")
-                .append("Valor minimo: ").append(calculeMin(arrayNumeros)).append("\n")
-                .append("Valor maximo: ").append(calculeMax(arrayNumeros)).append("\n")
-                .append("Valor promedio: ")
-                .append(calculeSum(arrayNumeros)).append("\n")
-                .append("Lista ordenada ASC: ").append(orderAsc(arrayNumeros)).append("\n")
-                .append("Lista ordenada DESC: ").append(orderDesc(arrayNumeros)).append("\n");
-        System.out.println(result);
 
+        System.out.println(printResults(arrayNumeros));
     }
 
     public static int calculeMax(List<Integer> list){
@@ -43,5 +35,16 @@ public class ListasYarreglos {
 
     public static List<Integer> orderDesc(List<Integer> list){
         return list.stream().sorted(Comparator.reverseOrder()).toList();
+    }
+
+    public static String printResults(List<Integer> arrayNumeros){
+        return new StringBuilder()
+        .append("Lista ingresada: ").append(arrayNumeros).append("\n").append("\n")
+                .append("Valor minimo: ").append(calculeMin(arrayNumeros)).append("\n")
+                .append("Valor maximo: ").append(calculeMax(arrayNumeros)).append("\n")
+                .append("Valor promedio: ")
+                .append(calculeSum(arrayNumeros)).append("\n")
+                .append("Lista ordenada ASC: ").append(orderAsc(arrayNumeros)).append("\n")
+                .append("Lista ordenada DESC: ").append(orderDesc(arrayNumeros)).append("\n").toString();
     }
 }
