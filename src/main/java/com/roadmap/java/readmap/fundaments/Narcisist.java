@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class Narcisist {
 
     public static void main(String[] args) {
-        int[] numeros = new int[]{1, 2, 3, 4, 5, 10, 15, 20, 25};
+        int[] numeros = new int[]{5, 10, 12, 15, 20, 25, 15, 25};
 
         System.out.println(numberNarcisiste(22));
         System.out.println(encondeString("Success"));
@@ -17,6 +17,8 @@ public class Narcisist {
         convertListToPar(numeros).forEach(System.out::println);
         listNoPar(numeros).forEach(System.out::println);
         listMayor(numeros).forEach(System.out::println);
+        example1(numeros).forEach(System.out::println);
+        System.out.println(example2(numeros));
 
 
 
@@ -98,5 +100,32 @@ public class Narcisist {
                 .mapToDouble(num-> num / 2.0)
                 .mapToInt(num -> (int) Math.round(num))
                 .boxed().toList();
+    }
+
+    public static List<Double> example1(int[] numeros){
+        System.out.println("example1");
+        return Arrays.stream(numeros)
+                .filter(num -> num > 10)
+                .mapToDouble(num -> num % 2 ==0 ? (double) num/2: Math.pow(num,3))
+                .boxed()
+                .distinct()
+                .sorted(Collections.reverseOrder()).toList();
+
+    }
+
+    public static String example2(int[] numeros){
+        System.out.println("example2");
+        String array = Arrays.stream(numeros)
+                .filter(num -> num > 10)
+                .map(num -> num % 2 ==0 ?  num/2: (int) Math.pow(num,3))
+                .distinct()
+                .boxed()
+                .sorted(Collections.reverseOrder())
+                .toList()
+                .stream().map(num -> "[" + num + "]")
+                .collect(Collectors.joining(", ")) // Une todos los elementos con comas
+                .trim();;
+        return array.isEmpty() ? "Lista vacia" : array;
+
     }
 }
